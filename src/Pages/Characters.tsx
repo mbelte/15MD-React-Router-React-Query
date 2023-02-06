@@ -3,21 +3,16 @@ import { CharacterRequest } from '../assets/types';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import Card from '../components/CardCharacter/Card';
+import { fetchCharacters } from '../assets/hepers';
 
 
 const CharactersPage: React.FunctionComponent = () => {
-    const [page, setCurrentPage] = useState(1)
+    const [page, setPage] = useState(1)
 
     const charactersQuery = useQuery({
         queryKey: ['characters'],
-        queryFn: async () => {
-            try {
-                const { data } = await axios<CharacterRequest>(`https://rickandmortyapi.com/api/character`);
-                return data.results;
-            } catch (e) {
-                console.log('network error', e);
-            }
-        }
+        queryFn: () => fetchCharacters(page),
+        keepPreviousData: true
     });
 
     if (charactersQuery.isLoading) return <h1>Loading request</h1>;

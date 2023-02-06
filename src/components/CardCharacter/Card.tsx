@@ -8,6 +8,14 @@ const Card: React.FunctionComponent<CharacterRequestResults> = ({ id, name, imag
     
     const statusClass = status !== 'Alive' ? style[status] : ''
 
+    const creationDate = new Date(created)
+                    .toLocaleDateString('en-us', { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric'
+                    });
+
     return (
         <div className={style.card}>
             <div className={style.imgHolder}>
@@ -19,10 +27,7 @@ const Card: React.FunctionComponent<CharacterRequestResults> = ({ id, name, imag
             <div className={style.info}>
                 <div className={style.header}>
                     <h3 className={style.heading}>
-                        <Link 
-                            to={`/characters/${id}`} 
-                            className={style.headingLnk}
-                        >
+                        <Link to={`/characters/${id}`} className={style.headingLnk}>
                             {name}
                         </Link>
                     </h3>
@@ -39,7 +44,7 @@ const Card: React.FunctionComponent<CharacterRequestResults> = ({ id, name, imag
                 </div>
                 <CardSection title="Gender" text={gender} />
                 <CardSection title="Origin" text={origin.name} />
-                <CardSection title="Created" text={created} />
+                <CardSection title="Created" text={creationDate} />
             </div>
         </div>
     );
