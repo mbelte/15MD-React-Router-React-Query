@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { CharacterRequest } from '../assets/types';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { fetchRMData } from '../assets/hepers';
 import { useQuery } from '@tanstack/react-query';
 import Card from '../components/CardCharacter/Card';
 
-export type CharactersPage = {};
 
-const CharactersPage: React.FunctionComponent<CharactersPage> = (Characters) => {
+const CharactersPage: React.FunctionComponent = () => {
     const [page, setCurrentPage] = useState(1)
-    const { id } = useParams()
-
-    useEffect(() => {
-        
-        // console.log(fetchRMData());
-    }, [])
 
     const charactersQuery = useQuery({
         queryKey: ['characters'],
@@ -24,15 +15,13 @@ const CharactersPage: React.FunctionComponent<CharactersPage> = (Characters) => 
                 const { data } = await axios<CharacterRequest>(`https://rickandmortyapi.com/api/character`);
                 return data.results;
             } catch (e) {
-                console.log('network error');
+                console.log('network error', e);
             }
         }
     });
 
-    if (charactersQuery.isLoading) return <h1>loading</h1>
-    if (charactersQuery.isError) return <h1>error</h1>;
-
-    // console.log(charactersQuery.data)
+    if (charactersQuery.isLoading) return <h1>Loading request</h1>;
+    if (charactersQuery.isError) return <h1>Request error</h1>;
 
     return (
         <div className="characters-list">

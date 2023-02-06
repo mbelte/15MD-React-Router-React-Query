@@ -1,19 +1,37 @@
 import React from 'react';
 import style from './Card.module.scss';
-import { CharacterRequestResults, CharacterToDisplay } from '../../assets/types';
+import { Link } from 'react-router-dom';
+import { CharacterRequestResults } from '../../assets/types';
 import CardSection from './CardSection';
 
 const Card: React.FunctionComponent<CharacterRequestResults> = ({ id, name, image, status, species, origin, gender, created }) => {
+    
+    const statusClass = status !== 'Alive' ? style[status] : ''
+
     return (
         <div className={style.card}>
             <div className={style.imgHolder}>
-                <img src={image} alt={name} className={style.img} />
+                <Link to={`/characters/${id}`}>
+                    <img src={image} alt={name} className={style.img} />
+                </Link>
             </div>
 
             <div className={style.info}>
                 <div className={style.header}>
-                    <h3 className={style.heading}>{name}</h3>
-                    <div className={style.desc}>
+                    <h3 className={style.heading}>
+                        <Link 
+                            to={`/characters/${id}`} 
+                            className={style.headingLnk}
+                        >
+                            {name}
+                        </Link>
+                    </h3>
+                    <div
+                        className={`
+                            ${style.desc} 
+                            ${statusClass}
+                        `}
+                    >
                         <span className={style.status}>
                             {status} - {species}
                         </span>

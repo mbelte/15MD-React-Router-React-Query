@@ -30,3 +30,20 @@ body {
   gap: 30px;
   padding: 60px 0;
 }
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.error-page {
+    color: red;
+}
+
+.error-page h1 {
+    font-size: 50px;
+}
+.error-page p {
+    padding: 14px 0;
+}

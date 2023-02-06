@@ -1,27 +1,27 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
 import Header from './components/Header/Header';
 import AboutPage from './Pages/About';
 import CharacterPage from './Pages/Character';
 import CharactersPage from './Pages/Characters';
 import HomePage from './Pages/Home';
+import NotFound from './Pages/NotFound';
 
-export type AppProps = {};
-
-const App: React.FunctionComponent<AppProps> = () => {
+const App: React.FunctionComponent = () => {
     return (
         <main className="main-wrap">
             <Header />
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="characters">
-                        <Route index element={<CharactersPage />} />
-                        <Route path=":id" element={<CharacterPage />} />
-                    </Route>
-                    <Route path="about" element={<AboutPage />} />
-                </Routes>
-            </BrowserRouter>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="characters">
+                    <Route index element={<CharactersPage />} />
+                    <Route path=":id" element={<CharacterPage />} />
+                </Route>
+                <Route path="about" element={<AboutPage />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
         </main>
     );
 };

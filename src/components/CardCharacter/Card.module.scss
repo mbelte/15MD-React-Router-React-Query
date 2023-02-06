@@ -32,6 +32,15 @@
     font-size: 30px;
     font-weight: 900;
 }
+.headingLnk {
+    color: #fff;
+    text-decoration: none;
+    transition: text-shadow 0.4s;
+
+    &:hover {
+        text-shadow: 0 3px 10px #aeaeae;
+    }
+}
 
 .desc {
     display: flex;
@@ -48,11 +57,11 @@
     width: 10px;
 }
 
-.descDead::before {
+.Dead::before {
     background-color: red;
 }
 
-.descunknown::before {
+.unknown::before {
     background-color: gray;
 }
 

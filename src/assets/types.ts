@@ -44,20 +44,17 @@ type CharacterRequest = {
     results: CharacterRequestResults[],
 }
 
-type EpisodeRequest = {
-    air_date: string,
-    characters: string[],
-    created: string,
-    episode: string,
-    id: number,
-    name: string,
-    url: string,
-}
+type EpisodeUsedData = {
+    name: string;
+    episode: string;
+};
 
-export type {
-    CharacterRequestInfo,
-    CharacterToDisplay,
-    CharacterRequestResults,
-    CharacterRequest,
-    EpisodeRequest
-}
+type EpisodeRequest = EpisodeUsedData & {
+    id: number;
+    air_date: string;
+    characters: string[];
+    url: string;
+    created: string;
+};
+
+export type { CharacterRequestInfo, CharacterToDisplay, CharacterRequestResults, CharacterRequest, EpisodeRequest, EpisodeUsedData };
